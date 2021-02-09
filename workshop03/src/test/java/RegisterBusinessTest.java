@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -136,5 +138,18 @@ public class RegisterBusinessTest {
         assertNotNull(speakerId);
         assertEquals(100, speakerId);
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1, 500",
+            "2, 250",
+            "5, 100",
+            "9, 50"
+    })
+    public void cal_culate_fee_from_exp(int expYear, int fee){
+        RegisterBusiness registerBusiness = new RegisterBusiness();
+        assertEquals(fee,registerBusiness.calculateFee(expYear));
+    }
+
 
 }

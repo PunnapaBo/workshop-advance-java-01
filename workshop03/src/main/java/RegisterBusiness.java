@@ -9,23 +9,10 @@ public class RegisterBusiness {
         if (speaker.getFirstName() != null && !speaker.getFirstName().trim().equals("")) {
             if (speaker.getLastName() != null && !speaker.getLastName().trim().equals("")) {
                 if (speaker.getEmail() != null && !speaker.getEmail().trim().equals("")) {
-                    if(speaker.getEmail().indexOf("@") == -1){
-                        throw new InvalidEmailFormatException("Email format isn't valid");
-                    }
-                    String emailDomain = speaker.getEmail().split("@")[1]; // outofbound
+                    String emailDomain = getEmailDomain(speaker.getEmail()); // outofbound
                     if (Arrays.stream(domains).filter(it -> it.equals(emailDomain)).count() == 1) {
                         int exp = speaker.getExp();
-                        if (exp <= 1) {
-                            speaker.setRegistrationFee(500);
-                        } else if (exp >= 2 && exp <= 3) {
-                            speaker.setRegistrationFee(250);
-                        } else if (exp >= 4 && exp <= 5) {
-                            speaker.setRegistrationFee(100);
-                        } else if (exp >= 6 && exp <= 9) {
-                            speaker.setRegistrationFee(50);
-                        } else {
-                            speaker.setRegistrationFee(0);
-                        }
+                        speaker.setRegistrationFee(calculateFee( exp));
                         try {
                             speakerId = repository.saveSpeaker(speaker);
                         }catch (Exception exception) {
@@ -45,6 +32,29 @@ public class RegisterBusiness {
         }
 
         return speakerId;
+    }
+
+    public int calculateFee( int exp) {
+        int fee = 0;
+        if (exp <= 1) {
+           fee = 500;
+        } else if (exp <= 3) {
+            fee = 250;
+        } else if (exp >= 4 && exp <= 5) {
+            fee = 100;
+        } else if (exp >= 6 && exp <= 9) {
+            fee = 50;
+        }
+
+        return fee;
+    }
+
+    public String getEmailDomain(String email) {
+        String[] split = email.split("@");
+        if(split.length != 2){
+            throw new InvalidEmailFormatException("Email format isn't valid");
+        }
+        return split[1];
     }
 
 }
