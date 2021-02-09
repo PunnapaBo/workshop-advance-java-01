@@ -16,10 +16,8 @@ public class EmailDomainTest {
     @Test
     public void valid_domain_email_throw_arrayIndexOutOfBound(){
         RegisterBusiness registerBusiness = new RegisterBusiness();
-
-        Exception exception = assertThrows(InvalidEmailFormatException.class, () -> {
-            String result = registerBusiness.getEmailDomain("demo@gmail.com");
-            assertEquals("gmail.com",result);
-        });
+        String result = registerBusiness.getEmailDomain("demo@gmail.com");
+        assertEquals("gmail.com",result);
+       
     }
 }
