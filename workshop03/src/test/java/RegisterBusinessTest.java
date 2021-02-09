@@ -57,6 +57,24 @@ public class RegisterBusinessTest {
     }
 
     @Test
+    public void register_with_empty_email_should_throw_ArrayIndexOutOfBoundsException() {
+        // Arrange
+        RegisterBusiness registerBusiness = new RegisterBusiness();
+        Speaker newSpeaker = new Speaker();
+        newSpeaker.setFirstName("Demo");
+        newSpeaker.setLastName("Demo last");
+        newSpeaker.setEmail("Demo.com");
+
+        // Act
+        Exception exception = assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+            registerBusiness.register(null, newSpeaker);
+        });
+
+        // Assert
+        assertEquals("Index 1 out of bounds for length 1", exception.getMessage());
+    }
+
+    @Test
     public void register_with_invalid_domain_of_email_should_throw_SpeakerDoesntMeetRequirementsException() {
         // Arrange
         RegisterBusiness registerBusiness = new RegisterBusiness();

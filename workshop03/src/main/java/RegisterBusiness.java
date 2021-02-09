@@ -9,7 +9,7 @@ public class RegisterBusiness {
         if (speaker.getFirstName() != null && !speaker.getFirstName().trim().equals("")) {
             if (speaker.getLastName() != null && !speaker.getLastName().trim().equals("")) {
                 if (speaker.getEmail() != null && !speaker.getEmail().trim().equals("")) {
-                    String emailDomain = speaker.getEmail().split("@")[1];
+                    String emailDomain = speaker.getEmail().split("@")[1]; // outofbound
                     if (Arrays.stream(domains).filter(it -> it.equals(emailDomain)).count() == 1) {
                         int exp = speaker.getExp();
                         if (exp <= 1) {
