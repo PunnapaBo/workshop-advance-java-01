@@ -57,7 +57,7 @@ public class RegisterBusinessTest {
     }
 
     @Test
-    public void register_with_empty_email_should_throw_ArrayIndexOutOfBoundsException() {
+    public void register_with_empty_email_should_throw_InvalidEmailFormatException() {
         // Arrange
         RegisterBusiness registerBusiness = new RegisterBusiness();
         Speaker newSpeaker = new Speaker();
@@ -66,12 +66,12 @@ public class RegisterBusinessTest {
         newSpeaker.setEmail("Demo.com");
 
         // Act
-        Exception exception = assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+        Exception exception = assertThrows(InvalidEmailFormatException.class, () -> {
             registerBusiness.register(null, newSpeaker);
         });
 
         // Assert
-        assertEquals("Index 1 out of bounds for length 1", exception.getMessage());
+        assertEquals("Email format isn't valid", exception.getMessage());
     }
 
     @Test
