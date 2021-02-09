@@ -1,3 +1,5 @@
+package model;
+
 public class BookBuilder {
     private Book book;
 

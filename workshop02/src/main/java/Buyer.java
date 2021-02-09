@@ -1,3 +1,7 @@
+import model.Basket;
+import model.Book;
+import model.BookBuilder;
+
 public class Buyer {
     private String firstName;
     private String lastName;
@@ -6,8 +10,8 @@ public class Buyer {
         // 1. Create basket
         Basket basket = new Basket();
         // 2. Add book to basket
-        Book book1 = new Book("Potter 1", 8);
-        Book book2 = new Book("Potter 2", 8);
+        Book book1 = new BookBuilder().chooseBook("Potter 1").build();
+        Book book2 = new BookBuilder().chooseBook("Potter 2").build();
         Book book3 = new BookBuilder().chooseBook("Potter 3").build();
         basket.addBook(book1);
         basket.addBook(book2);
