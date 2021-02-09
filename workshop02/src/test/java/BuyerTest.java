@@ -1,8 +1,10 @@
-public class Buyer {
-    private String firstName;
-    private String lastName;
+import org.junit.jupiter.api.Test;
 
-    public void requestToBuy() {
+import static org.junit.jupiter.api.Assertions.*;
+
+class BuyerTest {
+    @Test
+    public void buy_3_books() {
         // 1. Create basket
         Basket basket = new Basket();
         // 2. Add book to basket
@@ -13,10 +15,12 @@ public class Buyer {
         basket.addBook(book2);
         basket.addBook(book3);
         // 3. Checkout
-        // TODO :: checkout process
         Checkout checkout = new Checkout();
         checkout.process(basket);
 
         // Check netPrice = 24, discountPrice 24 - 10%
+        assertEquals(2400, basket.getNetPrice()); // 24.00
+        assertEquals(2160, basket.getDiscountPrice()); // 21.60
     }
+
 }
