@@ -1,15 +1,15 @@
 package calculator;
 
 import model.Basket;
-import model.Book;
+import model.Item;
 
 public class PriceCalculator {
 
     public static int get(Basket basket) {
         // Logic
         int price = 0;
-        for ( Book book: basket.getBooks()){
-            price += book.getPrice();
+        for ( Item item: basket.getBooks()){
+            price += item.getBook().getPrice() * item.getQty();
         }
         return price*100;
     }

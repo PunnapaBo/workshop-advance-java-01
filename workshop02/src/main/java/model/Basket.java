@@ -4,12 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Basket {
-    List<Book> books = new ArrayList<>();
+    List<Item> books = new ArrayList<>();
     private int netPrice;
     private int discountPrice;
 
     public void addBook(Book book) {
-        books.add(book);
+        //BigO(n)
+        boolean isExisted = false;
+        for(Item item : books){
+
+            if(item.isSame(book.getName())){
+                isExisted = true;
+                break;
+            }
+
+        }
+        if(!isExisted){
+            Item newItem = new Item(book,1);
+            books.add(newItem);
+        }
+
     }
 
     public int getNetPrice() {
@@ -28,7 +42,7 @@ public class Basket {
         this.discountPrice = discountPrice;
     }
 
-    public List<Book> getBooks() {
+    public List<Item> getBooks() {
         return books;
     }
 }
