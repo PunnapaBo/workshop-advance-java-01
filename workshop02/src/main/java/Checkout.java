@@ -1,3 +1,5 @@
+import calculator.DiscountCalculator;
+import calculator.PriceCalculator;
 import model.Basket;
 
 public class Checkout {
